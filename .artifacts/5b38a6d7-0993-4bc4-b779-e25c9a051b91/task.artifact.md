@@ -1,0 +1,7 @@
+- `[x]` Arréter les processus Gradle (`./gradlew --stop`)
+- `[x]` Corriger `ProgressScreen.kt` (index, protection division par zéro, virgule)
+- `[x]` Rendre `FinishScreen.kt` dynamique
+- `[x]` Mettre à jour `AppNavigation.kt` pour passer les données
+- `[x]` Compiler et vérifier le projet
+- `[x]` Résoudre le conflit de lancement de l'émulateur (processus bloqué)
+- `[x]` Déployer et vérifier l'exécution sur l'émulateur
