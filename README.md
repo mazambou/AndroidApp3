@@ -1,6 +1,6 @@
 # AndroidApp3
 
-### City Treasure Hunt
+## City Treasure Hunt
 
 City Treasure Hunt is a simple Android treasure hunt application developed with Kotlin and Jetpack Compose.
 
@@ -10,7 +10,7 @@ Each location provides a clue that guides the participant to the next destinatio
 
 After visiting all 20 locations, the participant becomes eligible to enter a draw for a free vacation.
 
-### Features
+## Features
 
 - City Hall as the starting location
 - 20 sequential treasure hunt locations
@@ -25,7 +25,7 @@ After visiting all 20 locations, the participant becomes eligible to enter a dra
 - Simple state management using ViewModel
 - Material 3 user interface
 
-### Application Screens
+## Application Screens
 
 The application mainly contains four screens:
 
@@ -75,7 +75,7 @@ The screen also displays the total progress, for example:
 5 / 20 locations visited
 ```
 
-### Treasure Hunt Locations
+## Treasure Hunt Locations
 
 The application contains 20 locations:
 
@@ -100,7 +100,7 @@ The application contains 20 locations:
 19. City Museum
 20. Travel Agency
 
-### Project Structure
+## Project Structure
 
 ```text
 com.example.androidapp3
