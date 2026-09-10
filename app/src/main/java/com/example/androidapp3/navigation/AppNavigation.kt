@@ -1,6 +1,8 @@
 package com.example.androidapp3.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,26 +16,49 @@ import com.example.androidapp3.viewmodel.TreasureHuntViewModel
 @Composable
 fun AppNavigation() {
 
+    // Navigation controller
     val navController = rememberNavController()
 
+    // Android context used for SharedPreferences
+    val context = LocalContext.current
+
+    // Shared ViewModel used by all screens
     val treasureHuntViewModel: TreasureHuntViewModel = viewModel()
+
+    // Load saved progress when the application starts
+    LaunchedEffect(Unit) {
+        treasureHuntViewModel.loadProgress(context)
+    }
 
     NavHost(
         navController = navController,
         startDestination = "home"
     ) {
 
+        // --------------------------------------------------
+        // HOME SCREEN
+        // --------------------------------------------------
+
         composable("home") {
 
             HomeScreen(
                 onStartClick = {
 
-                    treasureHuntViewModel.resetGame()
+                    /*
+                     * Do NOT reset the game here.
+                     *
+                     * If the user already played before,
+                     * the saved progress will be preserved.
+                     */
 
                     navController.navigate("hunt")
                 }
             )
         }
+
+        // --------------------------------------------------
+        // TREASURE HUNT SCREEN
+        // --------------------------------------------------
 
         composable("hunt") {
 
@@ -50,6 +75,10 @@ fun AppNavigation() {
             )
         }
 
+        // --------------------------------------------------
+        // PROGRESS SCREEN
+        // --------------------------------------------------
+
         composable("progress") {
 
             ProgressScreen(
@@ -61,14 +90,22 @@ fun AppNavigation() {
             )
         }
 
+        // --------------------------------------------------
+        // FINISH SCREEN
+        // --------------------------------------------------
+
         composable("finish") {
 
             FinishScreen(
                 totalLocations = treasureHuntViewModel.businesses.size,
+
                 onRestartClick = {
 
-                    treasureHuntViewModel.resetGame()
+                    // Reset progress in ViewModel
+                    // and delete saved SharedPreferences
+                    treasureHuntViewModel.resetGame(context)
 
+                    // Return to Home Screen
                     navController.navigate("home") {
 
                         popUpTo("home") {
